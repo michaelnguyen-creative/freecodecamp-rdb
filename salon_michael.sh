@@ -34,7 +34,7 @@ SERVICE_MENU()
   esac
 }
 
-# Build GET_customer_info function
+# Build GET_customer_info feature
 GET_CUSTOMER_INFO() 
 {
   local CUSTOMER_PHONE customer_id CUSTOMER_NAME
@@ -53,7 +53,7 @@ GET_CUSTOMER_INFO()
     read CUSTOMER_NAME
 
     # Insert into customers
-    insert_customer=$($PSQL "INSERT INTO customers(phone, name) VALUES('$CUSTOMER_PHONE', '$CUSTOMER_NAME');")
+    INSERT_CUSTOMER=$($PSQL "INSERT INTO customers(phone, name) VALUES('$CUSTOMER_PHONE', '$CUSTOMER_NAME');")
 
     # Get new customer_id
     customer_id=$($PSQL "SELECT customer_id FROM customers WHERE phone = '$CUSTOMER_PHONE';")
@@ -64,12 +64,12 @@ GET_CUSTOMER_INFO()
 
   fi
 
-  # call SET_APPOINTMENT function
+  # call SET_APPOINTMENT feature
   SET_APPOINTMENT
 }  
 
 
-# Build SET_APPOINTMENT function
+# Build SET_APPOINTMENT feature
 SET_APPOINTMENT()
 {
   local SERVICE_TIME
@@ -81,10 +81,7 @@ SET_APPOINTMENT()
   INSERT_APPOINTMENT=$($PSQL "INSERT INTO appointments(customer_id, time, service_id) VALUES($customer_id, '$SERVICE_TIME', $SERVICE_ID_SELECTED);")
 
   # Print out the appointment result
-  echo -e "\nI have put you down for a $(echo $SERVICE_NAME | sed 's/^ $//') at $SERVICE_TIME, $(echo $CUSTOMER_NAME | sed 's/^ //')"
-
-  # send to SERVICE_MENU
-  SERVICE_MENU
+  echo -e "\nI have put you down for a $(echo $SERVICE_NAME | sed 's/^ $//') at $SERVICE_TIME, $(echo $CUSTOMER_NAME | sed 's/^ //')."
 }  
 
 
