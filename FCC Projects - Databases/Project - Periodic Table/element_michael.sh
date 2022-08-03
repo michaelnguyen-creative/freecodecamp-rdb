@@ -1,5 +1,4 @@
 #!/bin/bash
-echo -e "\n~~~Periodic Table~~~\n"
 PSQL="psql -U freecodecamp -d periodic_table -t --no-align -c"
 
 # Input number
@@ -9,13 +8,13 @@ QUERY_NUMBER() {
   if [[ -z $QUERY_RESULT ]];
   then
     echo "I could not find that element in the database."
-  else  
+  else
     # return query result
     echo $QUERY_RESULT | while IFS='|' read ATOMIC_NUMBER SYMBOL NAME TYPE ATOMIC_MASS MELTING_POINT_CELSIUS BOILING_POINT_CELSIUS
     do
       echo "The element with atomic number $ATOMIC_NUMBER is $NAME ($SYMBOL). It's a $TYPE, with a mass of $ATOMIC_MASS amu. $NAME has a melting point of $MELTING_POINT_CELSIUS celsius and a boiling point of $BOILING_POINT_CELSIUS celsius."
     done
-  fi  
+  fi
 }
 
 # Input string
@@ -25,13 +24,13 @@ QUERY_STRING() {
   if [[ -z $QUERY_RESULT ]];
   then
     echo "I could not find that element in the database."
-  else  
+  else
     # return query result
     echo $QUERY_RESULT | while IFS='|' read ATOMIC_NUMBER SYMBOL NAME TYPE ATOMIC_MASS MELTING_POINT_CELSIUS BOILING_POINT_CELSIUS
     do
       echo "The element with atomic number $ATOMIC_NUMBER is $NAME ($SYMBOL). It's a $TYPE, with a mass of $ATOMIC_MASS amu. $NAME has a melting point of $MELTING_POINT_CELSIUS celsius and a boiling point of $BOILING_POINT_CELSIUS celsius."
     done
-  fi  
+  fi
 }
 
 
@@ -46,7 +45,6 @@ then
   else
     QUERY_STRING
   fi
-else  
-  echo -e "\nPlease provide an element as an argument."
+else
+  echo "Please provide an element as an argument."
 fi
-
